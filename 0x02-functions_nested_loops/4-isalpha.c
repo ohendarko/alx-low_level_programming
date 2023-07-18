@@ -1,8 +1,9 @@
 #include "main.h"
 #include <stdio.h>
 /**
-* _islower - Shows 1 if the input is a lowercase character.
-*Another cases, shows 0
+* _isalpha - Shows 1 if the input is a letter
+*lowercase or uppercase character
+*Other cases, shows 0
 *
 * @c:  Variable is character in ASCII code
 *
