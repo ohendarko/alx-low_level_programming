@@ -2,37 +2,37 @@
 #include <stdio.h>
 /**
 * cap_string - entry point
-* @a: parameter to be printed
+* @str: parameter to be printed
 * n: no of element
 * Return: return 0
 */
-char *cap_string(char *a)
+char *cap_string(char *str)
 {
-	int i = 0;
+	int index = 0;
 
-	while (a[i])
+	while (str[index])
 	{
-		while (!(a[i] >= 'a' && a[i] <= 'z'))
-			i++;
+		while (!(str[index] >= 'a' && str[index] <= 'z'))
+			index++;
 
-		if (a[i - 1] == ' ' ||
-		    a[i - 1] == '\t' ||
-		    a[i - 1] == '\n' ||
-		    a[i - 1] == ',' ||
-		    a[i - 1] == ';' ||
-		    a[i - 1] == '.' ||
-		    a[i - 1] == '!' ||
-		    a[i - 1] == '?' ||
-		    a[i - 1] == '"' ||
-		    a[i - 1] == '(' ||
-		    a[i - 1] == ')' ||
-		    a[i - 1] == '{' ||
-		    a[i - 1] == '}' ||
-		    i == 0)
-			a[i] -= 32;
+		if (str[index - 1] == ' ' ||
+		    str[index - 1] == '\t' ||
+		    str[index - 1] == '\n' ||
+		    str[index - 1] == ',' ||
+		    str[index - 1] == ';' ||
+		    str[index - 1] == '.' ||
+		    str[index - 1] == '!' ||
+		    str[index - 1] == '?' ||
+		    str[index - 1] == '"' ||
+		    str[index - 1] == '(' ||
+		    str[index - 1] == ')' ||
+		    str[index - 1] == '{' ||
+		    str[index - 1] == '}' ||
+		    index == 0)
+			str[index] -= 32;
 
-		i++;
+		index++;
 	}
 
-	return (a);
+	return (str);
 }
