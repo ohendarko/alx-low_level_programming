@@ -9,9 +9,9 @@
 char *rot13(char *s)
 {
 	int i, j;
-
 	char original[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopgrstuvwxyz";
 	char swap[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		for (j = 0; original[j] != '\0'; j++)
