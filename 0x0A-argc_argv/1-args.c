@@ -6,8 +6,9 @@
 * @argv: argument vector
 * Return: whatever
 */
-int main(int argc , char *argv[]__attribute__((unused)))
+int main(int argc, char *argv[])
 {
-	printf("%d\n", argc);
+	(void) argv;
+	printf("%d\n", argc - 1);
 	return (0);
 }
