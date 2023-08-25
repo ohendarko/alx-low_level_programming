@@ -1,28 +1,34 @@
 #include "lists.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 /**
-* print_list - function of type size_t
-* @h: pointer that returns list_t type
+* add_node - function of type size_t
+* @head: pointer that returns list_t type
+* @str: betty
 * Return: size_t
 */
-size_t print_list(const list_t *h)
+list_t *add_node(list_t **head, const char *str)
 {
-	size_t links = 0;
+	list_t *newnode;
 
-	while (h)
+	if (str == NULL)
 	{
-		if (h->str == NULL)
-		{
-			printf("[0] (nil)\n");
-		}
-		else
-		{
-			printf("[%u] ", h->len);
-			printf("%s\n", h->str);
-		}
-		h = h->next;
-		links++;
+		return (NULL);
 	}
-	return (links);
+	newnode = malloc(sizeof(list_t));
+	if (newnode == NULL)
+	{
+		return (NULL);
+	}
+	newnode->str = strdup(str);
+	if (newnode->str == NULL)
+	{
+		free(newnode);
+		return (NULL);
+	}
+	newnode->len = strlen(str);
+	newnode->next = *head;
+	*head = newnode;
+	return (newnode);
 }
