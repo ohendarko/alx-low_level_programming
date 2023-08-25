@@ -20,4 +20,3 @@ main:
     ; Set return value to 0 and exit
     mov eax, 0
     ret
-
