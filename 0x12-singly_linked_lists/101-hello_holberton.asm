@@ -1,17 +1,23 @@
-global _start
+global main
+    extern printf
+
+section .data
+    format db "Hello, Holberton", 0
+    newline db 10, 0  ; Newline character and null terminator
+
 section .text
+main:
+    ; Print the message
+    mov edi, format
+    xor eax, eax
+    call printf
 
-_start:
-mov rax, 1	; write(
-mov rdi, 1	;	STDOUT_FILENO,
-mov rsi, msg	;	"Hello, Holberton\n",
-mov rdx, msglen	;	sizeof("Hello, Holberton\n")
-syscall		; );
+    ; Print a newline
+    mov edi, newline
+    xor eax, eax
+    call printf
 
-mov rax, 60	; exit(
-mov rdi, 0	;	EXIT_SUCCESS
-syscall		; );
+    ; Set return value to 0 and exit
+    mov eax, 0
+    ret
 
-section .rodata
-msg: db "Hello, Holberton!", 10
-msglen: equ $ - msg
