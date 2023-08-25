@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
-* print_list - function of type size_t
+* list_len - function of type size_t
 * @h: pointer that returns list_t type
 * Return: size_t
 */
