@@ -33,7 +33,6 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 		tracknow = tracknow->next;
 		count++;
 	}
-	
 	trackprev = tracknow->next;
 	tracknow->next = trackprev->next;
 
