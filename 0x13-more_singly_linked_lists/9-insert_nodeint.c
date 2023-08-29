@@ -18,16 +18,25 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	tracknow = *head;
 	trackprev = NULL;
 
-	if (*head == NULL && idx > 0)
+	if (idx == 0)
 	{
-		return (NULL);
+		given = malloc(sizeof(listint_t));
+		if (given == NULL)
+		{
+			return NULL;
+		}
+		given->n = n;
+		given->next = *head;
+		*head = given;
+		return (given);
 	}
-	while (tracknow != NULL && count < idx)
+	while (count < idx && tracknow != NULL)
 	{
 		trackprev = tracknow;
 		tracknow = tracknow->next;
 		count++;
-	if (count < idx)
+	}
+	if (count != idx)
 	{
 		return (NULL);
 	}
@@ -37,16 +46,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	}
 	given->n = n;
 	given->next = tracknow;
-	if (trackprev == NULL)
-	{
-		*head = given;
-	}
-	else
-	{
-		trackprev->next = given;
-	}
+	trackprev->next = given;
 
 	return (given);
-	}
-	return (NULL);
 }
