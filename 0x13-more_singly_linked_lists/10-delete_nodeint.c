@@ -24,8 +24,12 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 		free(tracknow);
 		return (1);
 	}
-	while (count < index - 1 && tracknow != NULL)
+	while (count < index - 1)
 	{
+		if (!tracknow || !(tracknow->next))
+		{
+			return (-1);
+		}
 		trackprev = tracknow;
 		tracknow = tracknow->next;
 		count++;
