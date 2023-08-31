@@ -3,13 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 /**
-* get_bit - function name
+* clear_bit - function name
 * @n: parameter
 * @index: parameter
 * Return: as usual
 */
 int clear_bit(unsigned long int *n, unsigned int index)
-{	
+{
 	unsigned long int alpha = 1UL << index;
 
 	if (index >= sizeof(unsigned long int) * 8)
