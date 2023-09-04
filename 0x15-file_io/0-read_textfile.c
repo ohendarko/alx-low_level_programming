@@ -9,26 +9,26 @@
 */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *file;
+	int fd;
 	ssize_t n;
 	char buffer[1024];
 
-	file = fopen(filename, "r");
-	if (file == NULL)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 	{
+		return (0);
+	}
+
+	n = read(fd, buffer, letters);
+
+	if (n == -1)
+	{
+		close(fd);
 		return (-1);
 	}
 
-	n = fread(buffer, sizeof(char), letters, file);
-
-	if (n == 0 && !feof(file))
-	{
-		fclose(file);
-		return (-1);
-	}
-
-	fwrite(buffer, sizeof(char), n, stdout);
-	fclose(file);
+	write(1, buffer, n);
+	close(fd);
 
 	return (n);
 }
