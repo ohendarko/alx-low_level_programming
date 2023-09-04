@@ -16,7 +16,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	file = fopen(filename, "r");
 	if (file == NULL)
 	{
-		return (0);
+		return (-1);
 	}
 
 	n = fread(buffer, sizeof(char), letters, file);
