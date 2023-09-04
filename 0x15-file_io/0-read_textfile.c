@@ -17,10 +17,10 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (fdes == -1)
 		return (0);
 
-	buffer = malloc(sizeof(char) * letters); 
+	buffer = malloc(sizeof(char) * letters);
 	n = read(fdes, buffer, letters);
 	i = write(1, buffer, n);
-	
+
 	free(buffer);
 	close(fdes);
 
