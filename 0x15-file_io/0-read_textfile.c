@@ -19,7 +19,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	buffer = malloc(sizeof(char) * letters);
 	n = read(fdes, buffer, letters);
-	i = write(1, buffer, n);
+	i = write(STDOUT_FILENO, buffer, n);
 
 	free(buffer);
 	close(fdes);
