@@ -9,26 +9,20 @@
 */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd;
-	ssize_t n;
-	char buffer[1024];
+	int fdes;
+	ssize_t n, i;
+	char *buffer;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
+	fdes = open(filename, O_RDONLY);
+	if (fdes == -1)
 		return (0);
-	}
 
-	n = read(fd, buffer, letters);
+	buffer = malloc(sizeof(char) * letters); 
+	n = read(fdes, buffer, letters);
+	i = write(1, buffer, n);
+	
+	free(buffer);
+	close(fdes);
 
-	if (n == -1)
-	{
-		close(fd);
-		return (-1);
-	}
-
-	write(1, buffer, n);
-	close(fd);
-
-	return (n);
+	return (i);
 }
