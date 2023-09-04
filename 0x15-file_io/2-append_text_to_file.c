@@ -19,7 +19,7 @@ int append_text_to_file(const char *filename, char *text_content)
 		while (text_content[len] != '\0')
 			len++;
 	}
-	fdes = open(filename, O_WRONLY | O_RDWR | O_APPEND);
+	fdes = open(filename, O_WRONLY | O_APPEND);
 
 	bytes = write(fdes, text_content, len);
 
