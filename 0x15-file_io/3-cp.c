@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#define BUFFER_SIZE 1024
 /**
 * main - main
 * @argc: arg count
@@ -9,41 +14,51 @@
 */
 int main(int argc, char *argv[])
 {
-	int ch;
-	const char *source_filename = argv[1];
-	const char *destination_filename = argv[2];
-	FILE *source_file = fopen(source_filename, "rb");
-	FILE *destination_file = fopen(destination_filename, "wb");
+	int fd_from, fd_to, rd_count, wr_count;
+	char buffer[BUFFER_SIZE];
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s source_file destination_file\n", argv[0]);
-		return (1);
+		dprintf(2, "Usage: cp file_from file_to\n");
+		return (97);
 	}
 
-	if (source_file == NULL)
+	fd_from = open(argv[1], O_RDONLY);
+	
+	if (fd_from == -1)
 	{
-		perror("Error opening source file");
-		return (1);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		return (98);
 	}
-	if (destination_file == NULL)
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
 	{
-		perror("Error opening destination file");
-		fclose(source_file);
-		return (1);
+		dprintf(2, "Error: Can't write to %s\n", argv[2]);
+		close(fd_from);
+		return (99);
 	}
-	while ((ch = fgetc(source_file)) != EOF)
+	while ((rd_count = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		fputc(ch, destination_file);
+		wr_count = write(fd_to, buffer, rd_count);
+		if (wr_count == -1)
+		{
+			dprintf(2, "Error: Can't write to %s\n", argv[2]);
+			close(fd_from);
+			close(fd_to);
+			return (99);
+		}
 	}
-
-	fclose(source_file);
-	fclose(destination_file);
-
-	if (chmod(destination_filename, 0664) == -1)
+	if (rd_count == -1)
 	{
-		perror("Error setting permissions");
-		return (1);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		close(fd_from);
+		close(fd_to);
+		return (98);
+	}
+	if (close(fd_from) == -1 || close(fd_to) == -1)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", (close(fd_from) == -1) ? fd_from : fd_to);
+		return (100);
 	}
 	return (0);
 }
