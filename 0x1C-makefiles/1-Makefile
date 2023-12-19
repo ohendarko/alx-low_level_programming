@@ -2,6 +2,6 @@ CC=gcc
 SRC=main.c school.c
 all: school
 school: $(SRC)
-	$(CC) main.c school.c -o $@
+	$(CC) $(SRC) -o $@
 clean:
 	rm school
